@@ -6,18 +6,18 @@ import {
   import { selfFormActions  } from '../../actions';
   import { connect } from 'react-redux';
 
-class CoughForm extends Component {
+class LossOfSenseOfSmellForm extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     
-    handleCoughChange = async (e, { value }) => {
+    handleLossOfSenseOfSmellChange = async (e, { value }) => {
         let bool;
         const split = value.split('_')
         split[1]==="true"? bool=true : bool=false;
         console.log(value);
-        this.props.handleCoughChangeinState(bool)
+        this.props.handleLossOfSenseOfSmellChangeinState(bool)
         await this.setState({value:value})
 
     }
@@ -26,20 +26,20 @@ class CoughForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>Cough?</label>
+              <label>LossOfSenseOfSmell?</label>
               <Form.Field
                 control={Radio}
                 label="No"
-                value='cough_false'
-                checked={value==='cough_false'}
-                onChange={this.handleCoughChange}
+                value='LossOfSenseOfSmell_false'
+                checked={value==='LossOfSenseOfSmell_false'}
+                onChange={this.handleLossOfSenseOfSmellChange}
               />
               <Form.Field
                 control={Radio}
                 label="Yes"
-                value='cough_true'
-                checked={value==='cough_true'}
-                onChange={this.handleCoughChange}
+                value='LossOfSenseOfSmell_true'
+                checked={value==='LossOfSenseOfSmell_true'}
+                onChange={this.handleLossOfSenseOfSmellChange}
               />
             </Form.Group>
          );
@@ -52,8 +52,8 @@ function mapState(state, ownProps) {
 }
 
 const actionCreators = {
-    handleCoughChangeinState:selfFormActions.handleCoughChange
+    handleLossOfSenseOfSmellChangeinState:selfFormActions.handlelossOfSenseOfSmellChange
 };
 
-const connectedCoughForm = connect(mapState, actionCreators)(CoughForm);
-export { connectedCoughForm as Cough };
+const connectedLossOfSenseOfSmellForm = connect(mapState, actionCreators)(LossOfSenseOfSmellForm);
+export { connectedLossOfSenseOfSmellForm as LossOfSenseOfSmell };

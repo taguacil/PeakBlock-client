@@ -6,18 +6,18 @@ import {
   import { selfFormActions  } from '../../actions';
   import { connect } from 'react-redux';
 
-class CoughForm extends Component {
+class NauseaForm extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     
-    handleCoughChange = async (e, { value }) => {
+    handleNauseaChange = async (e, { value }) => {
         let bool;
         const split = value.split('_')
         split[1]==="true"? bool=true : bool=false;
         console.log(value);
-        this.props.handleCoughChangeinState(bool)
+        this.props.handleNauseaChangeinState(bool)
         await this.setState({value:value})
 
     }
@@ -26,20 +26,20 @@ class CoughForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>Cough?</label>
+              <label>Nausea?</label>
               <Form.Field
                 control={Radio}
                 label="No"
-                value='cough_false'
-                checked={value==='cough_false'}
-                onChange={this.handleCoughChange}
+                value='Nausea_false'
+                checked={value==='Nausea_false'}
+                onChange={this.handleNauseaChange}
               />
               <Form.Field
                 control={Radio}
                 label="Yes"
-                value='cough_true'
-                checked={value==='cough_true'}
-                onChange={this.handleCoughChange}
+                value='Nausea_true'
+                checked={value==='Nausea_true'}
+                onChange={this.handleNauseaChange}
               />
             </Form.Group>
          );
@@ -52,8 +52,8 @@ function mapState(state, ownProps) {
 }
 
 const actionCreators = {
-    handleCoughChangeinState:selfFormActions.handleCoughChange
+    handleNauseaChangeinState:selfFormActions.handleNauseaChange
 };
 
-const connectedCoughForm = connect(mapState, actionCreators)(CoughForm);
-export { connectedCoughForm as Cough };
+const connectedNauseaForm = connect(mapState, actionCreators)(NauseaForm);
+export { connectedNauseaForm as Nausea };
