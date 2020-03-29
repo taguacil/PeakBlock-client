@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { alertActions, validatorActions } from '../../actions';
 import { withCookies } from 'react-cookie';
 import { LoginPage } from '../LoginPage';
+import { COVIDFORM } from '../COVIDForm';
 export class AppContainer extends Component {
   constructor(props) {
     super(props);
@@ -31,9 +32,14 @@ export class AppContainer extends Component {
               component={LoginPage}
               cookies={this.props.cookies}
             />
+            
+          <PrivateRoute
+              path={'/covid'}
+              component={COVIDFORM}
+              cookies={this.props.cookies}
+            />
           </Switch>
           </Router>
-          <Map/>
       </div>
     );
   }
