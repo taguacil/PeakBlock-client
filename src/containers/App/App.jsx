@@ -28,7 +28,7 @@ export class AppContainer extends Component {
               component={Map}
               cookies={this.props.cookies}
             />
-          <PrivateRoute
+          <PublicRoute
               path={'/login'}
               component={LoginPage}
               cookies={this.props.cookies}
@@ -40,12 +40,12 @@ export class AppContainer extends Component {
               cookies={this.props.cookies}
             />
             
-          <PrivateRoute
+          <PublicRoute
               path={'/Register'}
               component={RegisterPage}
               cookies={this.props.cookies}
             />
-        <Redirect from='*' to={'/Cases'} />
+        <Redirect from='*' to={'/cases'} />
 
           </Switch>
           </Router>

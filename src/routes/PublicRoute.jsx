@@ -5,6 +5,7 @@ import {authService} from "../services";
 
 export const PublicRoute = ({component: Component, ...rest}) => (
   <Route {...rest} render={props => (
-    authService.getCurrentUser() ? <Redirect to={{pathname: '/self/form', state: {from: props.location}}}/> : <Component {...props} />
+    
+    authService.getCurrentUser() ? <Redirect to={{pathname: '/', state: {from: props.location}}}/> : <Component {...props} />
   )}/>
 );

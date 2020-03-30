@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
+import {Link} from "react-router-dom";
 
 import {authActions, validatorActions} from '../../actions';
 
@@ -63,7 +64,7 @@ export class LoginContainer extends Component {
             </Segment>
           </Form>
           {/* removed due to invitation */}
-          {/*<Message>Don't have an account? <Link to='/register'>Register</Link></Message>*/}
+          {<Message>Don't have an account? <Link to='/register'>Register</Link></Message>}
         </Grid.Column>
       </Grid>
     );
