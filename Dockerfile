@@ -1,17 +1,23 @@
 # Will be used in production
 
-FROM node:alpine
+FROM node:alpine as build
 
 ARG api_url
 ENV REACT_APP_API_URL=$api_url
-ENV PORT=5000
 
-WORKDIR '/usr/src/app'
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
 
-COPY package.json .
-RUN npm install
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+COPY package.json /usr/src/app/package.json
 
-COPY . .
+RUN npm install --silent
+RUN npm install react-scripts -g --silent
+COPY . /usr/src/app
+RUN npm run build
 
-EXPOSE 5000
-CMD ["npm", "run", "build"]
+FROM nginx:1.13.12-alpine
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
