@@ -25,9 +25,10 @@ import { ChestPain } from "./chestPain";
 import { MuscleAche } from "./muscleAche";
 import { RunnyNose } from "./runnyNose";
 import{ Consfusion} from'./confusion';
-
-
-const countryOptions = [
+import{Personal} from '../personalForm'
+import { selfFormService } from './../../services';
+import { selfForm } from './../../reducers/selfForm.reducer';
+const TempOptions = [
   { key: 37, value: 37, text: '37' },
   { key: 37.5, value: 37.5, text: '37.5' },
   { key: 38, value: 38, text: '38' },
@@ -43,13 +44,23 @@ class COVIDFORM extends Component {
     }
   }
   setTemp = (e, { value }) => {
-    console.log(value);
-    
+  
     this.props.handleBodyTemperatureChangeinState(value)
   };
+  handleSubmit=async ()=>{
+    const {selfForm} = this.props;
+    const obj = {observations:selfForm.observations,
+      medical_conditions:selfForm.medical_conditions,
+      address:{city:selfForm.personal_data.email},
+      excorona:selfForm.excorona}
+      selfFormService.setForm(obj).then(res=>{
+        console.log(res);
+        
+      })
+    
+  }
   render() {
     const { value } = this.state;
-
     return (
       <Grid
         textAlign="center"
@@ -57,7 +68,7 @@ class COVIDFORM extends Component {
         verticalAlign="middle"
       >
         <Grid.Row columns={16}>
-          <Form size="large" onSubmit={""}>
+          <Form size="large" onSubmit={this.handleSubmit.bind(this)}>
 
              <Cough/>
              <Headache/>
@@ -71,16 +82,19 @@ class COVIDFORM extends Component {
              <MuscleAche/>
              <RunnyNose/>
              <Consfusion/>
-             <Dropdown
+              <Personal/>
+              <Dropdown
     clearable
     fluid
     search
     selection
-    options={countryOptions}
+    options={TempOptions}
     placeholder='Body Temperature'
     onChange={this.setTemp}
 
   />
+          <Button type="submit">Sumbit</Button>
+
             </Form>
         </Grid.Row>
       </Grid>

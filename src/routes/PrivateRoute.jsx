@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { authService } from '../services';
-//import Navigation from '../components/_shared/Navigation';
-//import { Alert } from '../components/_shared/Alert';
+import Navigation from '../components/_shared/Navigation';
+import { Alert } from '../components/_shared/Alert';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -10,13 +10,13 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
         render={(props) =>
             authService.getCurrentUser() ? (
                 <Fragment>
-                   {/* <Alert />
-                    <Navigation /> */}
+                    <Alert />
+                    <Navigation /> 
                     <Component {...props} {...rest} />
                 </Fragment>
             ) : (
                 <Redirect
-                    to={{ pathname: '/map', state: { from: props.location } }}
+                    to={{ pathname: '/login', state: { from: props.location } }}
                 />
             )
         }

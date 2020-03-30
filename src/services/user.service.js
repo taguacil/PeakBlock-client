@@ -15,7 +15,7 @@ export const userService = {
     getIsUserVerifiedBylId,
 };
 
-const apiEndpoint = apiUrl + '/users';
+const apiEndpoint = apiUrl 
 const getUserIdEndpoint = apiEndpoint + '/user';
 const settingsApiEndpoint = apiEndpoint + '/settings';
 const viewProfileApiEndpoint = settingsApiEndpoint + '/personal';
@@ -29,14 +29,19 @@ const getReviewsAsSellerApiEndpoint = reviewsApiEndpoint + '/seller';
 const getReviewsAsBuyerApiEndpoint = reviewsApiEndpoint + '/buyer';
 const getReviewsForOthersApiEndpoint = reviewsApiEndpoint + '/left';
 
-function register(user) {
+function register(user,regType) {
     const userData = { ...user };
-    userData.phone = {
-        code: phoneCode,
-        number: user.phone,
-    };
+    
+    if(regType === 'Practitioner'){
+        console.log(1);
+        
+    return httpService.post(`${apiEndpoint}/practitioners`, userData);
+    }else{
+        console.log(2);
+        
+    return httpService.post(`${apiEndpoint}/patients`, userData);
 
-    return httpService.post(apiEndpoint, userData);
+    }
 }
 
 function viewProfile() {
