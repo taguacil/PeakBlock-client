@@ -13,4 +13,4 @@ spec:
         - name: peakblockfrontend 
           image: cohub.azurecr.io/peakblockfrontend
           ports:
-          - containerPort: 5000
+          - containerPort: 80
