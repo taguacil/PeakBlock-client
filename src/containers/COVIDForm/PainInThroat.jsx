@@ -6,18 +6,18 @@ import {
   import { selfFormActions  } from '../../actions';
   import { connect } from 'react-redux';
 
-class CoughForm extends Component {
+class PainInThroatForm extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     
-    handleCoughChange = async (e, { value }) => {
+    handlePainInThroatChange = async (e, { value }) => {
         let bool;
         const split = value.split('_')
         split[1]==="true"? bool=true : bool=false;
         console.log(value);
-        this.props.handleCoughChangeinState(bool)
+        this.props.handlePainInThroatChangeinState(bool)
         await this.setState({value:value})
 
     }
@@ -26,20 +26,20 @@ class CoughForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>Cough?</label>
+              <label>Pain In Throat?</label>
               <Form.Field
                 control={Radio}
                 label="No"
-                value='cough_false'
-                checked={value==='cough_false'}
-                onChange={this.handleCoughChange}
+                value='PainInThroat_false'
+                checked={value==='PainInThroat_false'}
+                onChange={this.handlePainInThroatChange}
               />
               <Form.Field
                 control={Radio}
                 label="Yes"
-                value='cough_true'
-                checked={value==='cough_true'}
-                onChange={this.handleCoughChange}
+                value='PainInThroat_true'
+                checked={value==='PainInThroat_true'}
+                onChange={this.handlePainInThroatChange}
               />
             </Form.Group>
          );
@@ -52,8 +52,8 @@ function mapState(state, ownProps) {
 }
 
 const actionCreators = {
-    handleCoughChangeinState:selfFormActions.handleCoughChange
+    handlePainInThroatChangeinState:selfFormActions.handlePainInThroat
 };
 
-const connectedCoughForm = connect(mapState, actionCreators)(CoughForm);
-export { connectedCoughForm as Cough };
+const connectedPainInThroatForm = connect(mapState, actionCreators)(PainInThroatForm);
+export { connectedPainInThroatForm as PainInThroat };

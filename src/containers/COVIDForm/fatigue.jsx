@@ -6,18 +6,18 @@ import {
   import { selfFormActions  } from '../../actions';
   import { connect } from 'react-redux';
 
-class CoughForm extends Component {
+class FatigueForm extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     
-    handleCoughChange = async (e, { value }) => {
+    handleFatigueChange = async (e, { value }) => {
         let bool;
         const split = value.split('_')
         split[1]==="true"? bool=true : bool=false;
         console.log(value);
-        this.props.handleCoughChangeinState(bool)
+        this.props.handleFatigueChangeinState(bool)
         await this.setState({value:value})
 
     }
@@ -26,20 +26,20 @@ class CoughForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>Cough?</label>
+              <label>Fatigue?</label>
               <Form.Field
                 control={Radio}
                 label="No"
-                value='cough_false'
-                checked={value==='cough_false'}
-                onChange={this.handleCoughChange}
+                value='Fatigue_false'
+                checked={value==='Fatigue_false'}
+                onChange={this.handleFatigueChange}
               />
               <Form.Field
                 control={Radio}
                 label="Yes"
-                value='cough_true'
-                checked={value==='cough_true'}
-                onChange={this.handleCoughChange}
+                value='Fatigue_true'
+                checked={value==='Fatigue_true'}
+                onChange={this.handleFatigueChange}
               />
             </Form.Group>
          );
@@ -52,8 +52,8 @@ function mapState(state, ownProps) {
 }
 
 const actionCreators = {
-    handleCoughChangeinState:selfFormActions.handleCoughChange
+    handleFatigueChangeinState:selfFormActions.handleFatigueChange
 };
 
-const connectedCoughForm = connect(mapState, actionCreators)(CoughForm);
-export { connectedCoughForm as Cough };
+const connectedFatigueForm = connect(mapState, actionCreators)(FatigueForm);
+export { connectedFatigueForm as Fatigue };
