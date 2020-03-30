@@ -1,7 +1,7 @@
 import React, { useState ,PureComponent} from 'react';
 import ReactMapGL , {Marker} from 'react-map-gl';
 import PolylineOverlay from './ployline'
-import { Icon } from 'semantic-ui-react';
+import { Icon ,Dropdown , Grid} from 'semantic-ui-react';
 const data = {
   "confirmedCases": [
           {
@@ -93,16 +93,24 @@ export class Map extends React.Component {
 
   state = {
     viewport: {
-      width: 400,
-      height: 400,
+      width: 500,
+      height: 500,
       latitude: 46.8181877,
       longitude: 8.2275124,
       zoom: 8
-    }
+    },
+    selected:["confirmedCases","highProbableCases","deceasedCases","recoveredCases"]
   };
+  handleSelected= (e,{value})=>{
+    this.setState({...this.state,selected:value})
+    console.log(this.state,value);
+    
+  }
+
 
   render() {
-    const {confirmedCases,highProbableCases,deceasedCases} = data
+    const {selected} = this.state;
+    const {confirmedCases,highProbableCases,deceasedCases,recoveredCases} = data
         const confirmedMarker = confirmedCases.map((item,i) => {
           return (<Marker latitude={item.lat} longitude={item.lon} offsetLeft={-20} offsetTop={-10}>
           <Icon name='circle' style={{color:'red'}}/> 
@@ -118,20 +126,53 @@ export class Map extends React.Component {
         
         const deceasedMarker = deceasedCases.map((item,i) => {
           return (<Marker latitude={item.lat} longitude={item.lon} offsetLeft={-20} offsetTop={-10}>
-          <Icon name='circle' style={{color:'blue'}}/> 
+          <Icon name='circle' style={{color:'red'}}/> 
+          <h5>{item.count}</h5>
+            </Marker>)
+        });
+        
+        const recoveredMarker = recoveredCases.map((item,i) => {
+          return (<Marker latitude={item.lat} longitude={item.lon} offsetLeft={-20} offsetTop={-10}>
+          <Icon name='circle' style={{color:'green'}}/> 
           <h5>{item.count}</h5>
             </Marker>)
         });
     return (
-      <ReactMapGL
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={2}></Grid.Column>
+          <Grid.Column width={6}>
+          <ReactMapGL
         {...this.state.viewport}
         mapboxApiAccessToken={'pk.eyJ1IjoibW9oYW1lZGl4IiwiYSI6ImNrOGFxeXcyYTA1MWgzbW11YjRkZGo3NG4ifQ.tOEwHyE2XAibeYsI2kBFNQ'}
         onViewportChange={(viewport) => this.setState({viewport})}
       >
-        {confirmedMarker}
-        {deceasedMarker}
-        {highProbableMarker}
+        {selected.includes('confirmedCases')?confirmedMarker:''}
+        {selected.includes('deceasedCases')?deceasedMarker:''}
+        {selected.includes('highProbableCases')?highProbableMarker:''}
+        {selected.includes('recoveredCases')?recoveredMarker:''}
       </ReactMapGL>
+     
+          </Grid.Column>
+          <Grid.Column width={4}>
+          <Dropdown
+      fluid
+      options={[{key:'deceasedCases',value:'deceasedCases',text:'deceasedCases'},
+      {key:'highProbableCases',value:'highProbableCases',text:'highProbableCases'},
+      {key:'recoveredCases',value:'recoveredCases',text:'recoveredCases'},
+       {key:'confirmedCases',value:'confirmedCases',text:'confirmedCases'}]}
+      placeholder='Select your City'
+      search
+      selection
+      multiple
+      onChange={this.handleSelected}
+
+    />
+    </Grid.Column>
+      
+        </Grid.Row>
+        </Grid>
+      
 
     );
   }
