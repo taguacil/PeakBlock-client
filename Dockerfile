@@ -4,6 +4,7 @@ FROM node:alpine
 
 ARG api_url
 ENV REACT_APP_API_URL=$api_url
+ENV PORT=5000
 
 WORKDIR '/usr/src/app'
 
@@ -13,4 +14,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 5000
-CMD ["npm", "start"]
+CMD ["npm", "run", "build"]
