@@ -110,11 +110,6 @@ export function selfForm(state = intialstate, action) {
         ...state,
         observations: { ...state.observations, muscle_ache: action.data }
       };
-    case selfFormConstants.RUNNY_NOSE_SUCCESS:
-      return {
-        ...state,
-        observations: { ...state.observations, runny_nose: action.data }
-      };
     case selfFormConstants.CONFUSION_SUCCESS:
       return {
         ...state,
