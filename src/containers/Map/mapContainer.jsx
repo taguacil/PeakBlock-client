@@ -1,5 +1,6 @@
 import React, { useState ,PureComponent} from 'react';
 import ReactMapGL , {Marker} from 'react-map-gl';
+import PolylineOverlay from './ployline'
 import { Icon } from 'semantic-ui-react';
 
 export function Map() {
@@ -26,6 +27,11 @@ export function Map() {
      <Marker latitude={37.32} longitude={-123.69} offsetLeft={-20} offsetTop={-10}>
      hey<Icon name='circle'/>
      </Marker>
+    />
+    <PolylineOverlay  points={[
+    [-21.81884765625, 64.1297836764257],
+    [-19.79736328125, 64.1585310519412]]}/>
+
    </ReactMapGL>
   );
 }
