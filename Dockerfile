@@ -5,8 +5,7 @@ FROM node:alpine as build
 ARG api_url
 ENV REACT_APP_API_URL=$api_url
 
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR '/usr/src/app'
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY package.json /usr/src/app/package.json
