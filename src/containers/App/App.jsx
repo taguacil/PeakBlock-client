@@ -8,6 +8,7 @@ import { alertActions, validatorActions } from '../../actions';
 import { withCookies } from 'react-cookie';
 import { LoginPage } from '../LoginPage';
 import { COVID } from '../COVIDForm';
+import { RegisterPage } from '../RegisterPage'
 export class AppContainer extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ export class AppContainer extends Component {
         <Router history={history}>
           <Switch>
           <PrivateRoute
-              path={'/map'}
+              path={'/cases'}
               component={Map}
               cookies={this.props.cookies}
             />
@@ -34,10 +35,18 @@ export class AppContainer extends Component {
             />
             
           <PrivateRoute
-              path={'/covid'}
+              path={'/self/form'}
               component={COVID}
               cookies={this.props.cookies}
             />
+            
+          <PrivateRoute
+              path={'/Register'}
+              component={RegisterPage}
+              cookies={this.props.cookies}
+            />
+        <Redirect from='*' to={'/Cases'} />
+
           </Switch>
           </Router>
       </div>

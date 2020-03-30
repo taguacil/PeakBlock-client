@@ -3,7 +3,7 @@ import { selfFormConstants } from '../constants';
 
 export const selfFormActions={
     handleCoughChange,  handleConfusionChange,handleDiarrheaChange,handleNauseaChange,handlelossOfSenseOfSmellChange,handleMuscleAcheChange,handleChestPainChange
-    ,handleRunnyNoseChange,handleBodyTemperatureChange,handlePainInThroat,handleFatigueChange,handleHeadacheChange,handleDyspneaAtRestChange,handleExCoronaChange
+    ,handleLocationChange,handleEmailChange,handleNameChange,handleRunnyNoseChange,handleBodyTemperatureChange,handlePainInThroat,handleFatigueChange,handleHeadacheChange,handleDyspneaAtRestChange,handleExCoronaChange
 }
 function handleCoughChange(value) {
     return dispatch => {
@@ -28,6 +28,33 @@ function handleExCoronaChange(value) {
     };
     function success(value) {
       return {type: selfFormConstants.BODY_TEMPERATURE_SUCCESS, data:value}
+    }
+  }
+  
+  function handleEmailChange(value) {
+    return dispatch => {
+        dispatch(success(value));
+    };
+    function success(value) {
+      return {type: selfFormConstants.EMAIL_SUCCESS, data:value}
+    }
+  }
+  
+  function handleNameChange(value) {
+    return dispatch => {
+        dispatch(success(value));
+    };
+    function success(value) {
+      return {type: selfFormConstants.NAME_SUCCESS, data:value}
+    }
+  }
+  
+  function handleLocationChange(value) {
+    return dispatch => {
+        dispatch(success(value));
+    };
+    function success(value) {
+      return {type: selfFormConstants.LOCATION_SUCCESS, data:value}
     }
   }
   function handleFatigueChange(value) {
