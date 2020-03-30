@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
+import {Button, Form, Grid, Header, Dropdown,Message, Segment} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
 import {authActions, validatorActions} from '../../actions';
-
+const regOptions = [
+  { key: 'Practitioner', value: 'Practitioner', text: 'Practitioner' },
+  { key: 'Patient', value: 'Patient', text: 'Patient' }
+]
 export class LoginContainer extends Component {
   state = {email: '', password: '', submitted: false};
   schema = {
@@ -22,13 +25,20 @@ export class LoginContainer extends Component {
         "minLength": 8,
         "maxLength": 1024
       }
-    }
+    },
+    regType:'Practitioner'
+
   };
 
   handleChange = (e, {name, value}) => {
     this.props.validateInput(this.schema, name, value);
     this.setState({[name]: value});
   };
+  
+  handleRegOption = (e,{value})=>{
+    this.setState({...this.state,regType:value})
+
+  }
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +47,7 @@ export class LoginContainer extends Component {
     await this.props.validateForm(this.schema, {email, password});
     this.setState({submitted: false});
     if (!this.props.valid) return;
-    await this.props.login(email, password);
+    await this.props.login(email, password,this.state.regType);
   };
 
   render() {    
@@ -52,6 +62,17 @@ export class LoginContainer extends Component {
                    header={alert.header} content={alert.content}/>}
           <Form loading={loggingIn || submitted} size='large' onSubmit={this.handleSubmit}>
             <Segment>
+            <Dropdown
+            style={{ 'margin-bottom': 5 }}
+            size='large'
+            deburr
+            fluid
+            options={regOptions}
+            placeholder='Register As'
+            search
+            selection
+            onChange={this.handleRegOption}
+          />
               <Form.Input name='email' size='large' icon='mail' iconPosition='left'
                           placeholder='john.adams@email.com' value={email} onChange={this.handleChange}
                           error={errors && errors.email}/>

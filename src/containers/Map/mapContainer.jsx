@@ -3446,7 +3446,7 @@ export class Map extends React.Component {
       {key:'highProbableCases',value:'highProbableCases',text:'highProbableCases'},
       {key:'recoveredCases',value:'recoveredCases',text:'recoveredCases'},
        {key:'confirmedCases',value:'confirmedCases',text:'confirmedCases'}]}
-      placeholder='Select your City'
+      placeholder='Select Case Type'
       search
       selection
       multiple

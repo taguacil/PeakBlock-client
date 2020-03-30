@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import {httpService} from "./http.service";
 import {apiUrl} from "../config";
 
-const apiEndpoint = apiUrl + "/login";
+const apiEndpoint = apiUrl 
 const tokenKey = "token";
 
 export const authService = {
@@ -13,9 +13,17 @@ export const authService = {
   getJwt
 };
 
-async function login(email, password) {
-  const {data: jwt} = await httpService.post(apiEndpoint, {email, password});
-  return jwt;
+async function login(email, password ,regType) {
+  if(regType === 'Practitioner'){
+    
+
+    const {data: jwt} = await httpService.post(`${apiEndpoint}/practitioners/login`, {email, password});
+    return jwt;
+  }else{
+
+    const {data: jwt} = await httpService.post(`${apiEndpoint}/login`, {email, password});
+    return jwt;
+}
 }
 
 function logout() {

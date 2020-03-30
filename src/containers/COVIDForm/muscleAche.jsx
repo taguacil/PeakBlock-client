@@ -26,7 +26,7 @@ class MuscleAcheForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>MuscleAche?</label>
+              <label>Muscle Ache?</label>
               <Form.Field
                 control={Radio}
                 label="No"

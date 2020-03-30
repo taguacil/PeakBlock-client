@@ -26,7 +26,7 @@ class RunnyNoseForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>RunnyNose?</label>
+              <label>Runny Nose?</label>
               <Form.Field
                 control={Radio}
                 label="No"

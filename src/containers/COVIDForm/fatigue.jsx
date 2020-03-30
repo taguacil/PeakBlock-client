@@ -26,7 +26,7 @@ class FatigueForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>Fatigue?</label>
+              <label>Fatigue ?</label>
               <Form.Field
                 control={Radio}
                 label="No"

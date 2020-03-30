@@ -26,7 +26,7 @@ class LossOfSenseOfSmellForm extends Component {
         return ( 
             
             <Form.Group inline>
-              <label>LossOfSenseOfSmell?</label>
+              <label>Loss Sense of Smell?</label>
               <Form.Field
                 control={Radio}
                 label="No"

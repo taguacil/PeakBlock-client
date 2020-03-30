@@ -8,11 +8,11 @@ export const authActions = {
   logout
 };
 
-function login(email, password) {
+function login(email, password,regType) {
   return async dispatch => {
     dispatch(request({email}));
     try {
-      const {token} = await authService.login(email, password);
+      const {token} = await authService.login(email, password,regType);
       authService.loginWithJwt(token);
       const user = await authService.getCurrentUser();
       dispatch(success(user));
